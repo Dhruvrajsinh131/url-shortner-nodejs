@@ -10,6 +10,7 @@ module.exports.generateNewShortUrl = async (req, res) => {
     shortId: shortId,
     redirectUrl: redirectUrl,
     visitHistory: [],
+    createdBy: req.user._id,
   });
 
   return res.status(200).json({ id: shortId });
@@ -39,10 +40,8 @@ module.exports.getAnalytics = async (req, res) => {
     shortId: shortid,
   });
 
-  res
-    .status(200)
-    .json({
-      totalClicks: result.visitHistory.length,
-      analytics: result.visitHistory,
-    });
+  res.status(200).json({
+    totalClicks: result.visitHistory.length,
+    analytics: result.visitHistory,
+  });
 };
