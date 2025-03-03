@@ -21,10 +21,8 @@ module.exports.userLogin = async (req, res) => {
       message: "Invalid credantials",
     });
 
-  const sessionId = uuidv4();
-
-  setUser(sessionId, result);
-  res.cookie("uid", sessionId);
+  const token = setUser(result);
+  res.cookie("uid", token);
 
   return res.status(200).json({
     success: true,
